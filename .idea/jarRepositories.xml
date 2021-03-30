@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="repository-connect-snapshots" />
+      <option name="name" value="Connect - SNAPSHOTS" />
+      <option name="url" value="https://connect-nexus.garmin.com/repository/connect-snapshots" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="spring-libs-milestone" />
+      <option name="name" value="Spring Milestone Maven Repository" />
+      <option name="url" value="http://oss.jfrog.org/artifactory/oss-snapshot-local/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="repository-connect-releases" />
+      <option name="name" value="Connect - RELEASES" />
+      <option name="url" value="https://connect-nexus.garmin.com/repository/connect-releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="garmin-public" />
+      <option name="name" value="garmin-public" />
+      <option name="url" value="https://connect-nexus.garmin.com/repository/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+  </component>
+</project>
