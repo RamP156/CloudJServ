@@ -5,6 +5,16 @@
     <title>CloudJServ</title>
 </head>
 <body>
-<b>It works!</b>
+<b>This is CloudJServ - a Java based Web Server. It works!</b>
+<br>
+
+<b> Today date is <p id="date"></p> </b>
+<script>
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+</script>
 </body>
 </html>
