@@ -32,7 +32,7 @@ public final class Response implements HttpResponse {
         return this.headers;
     }
 
-    public void write(OutputStream outputStream) throws IOException {
+    public void write1(OutputStream outputStream) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
         bw.write(ResponseEntity.ok());
         bw.write(EMPTY_LINE);
@@ -62,6 +62,57 @@ public final class Response implements HttpResponse {
                 }
             }
         }
+        bw.flush();
+    }
+//this will display the env information on the default page
+    public void write(OutputStream outputStream) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+        bw.write(ResponseEntity.ok());
+        bw.write(EMPTY_LINE);
+
+        // Generate HTML content dynamically
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<!DOCTYPE html>");
+        htmlContent.append("<html>");
+        htmlContent.append("<head>");
+        htmlContent.append("<meta charset=\"UTF-8\">");
+        htmlContent.append("<title>Java Environment Variables</title>");
+        htmlContent.append("</head>");
+        htmlContent.append("<body>");
+        htmlContent.append("<h1>Java Environment Variables</h1>");
+        htmlContent.append("<table border=\"1\">");
+        htmlContent.append("<tr><th>Variable Name</th><th>Value</th></tr>");
+
+        Map<String, String> env = System.getenv();
+        for (Map.Entry<String, String> entry : env.entrySet()) {
+            htmlContent.append("<tr><td>")
+                       .append(entry.getKey())
+                       .append("</td><td>")
+                       .append(entry.getValue())
+                       .append("</td></tr>");
+        }
+
+        htmlContent.append("</table>");
+        htmlContent.append("</body>");
+        htmlContent.append("</html>");
+
+        String htmlString = htmlContent.toString();
+
+        // Set headers
+        headers.put(HttpHeaders.CONTENT_TYPE.getKey(), ResponseEntity.getMimeType("html"));
+        headers.put(HttpHeaders.CONTENT_LENGTH.getKey(), String.valueOf(htmlString.length()));
+        headers.put(HttpHeaders.CACHE_CONTROL.getKey(), "max-age=" + 60 * 60 * 24); // cache for 24 hours
+
+        // Write headers
+        for (String header : this.headers.keySet()) {
+            bw.write(header + COLON + headers.get(header));
+            bw.write(EMPTY_LINE);
+        }
+        bw.write(EMPTY_LINE);
+
+        // Write HTML content
+        bw.write(htmlString);
+
         bw.flush();
     }
 }
