@@ -32,38 +32,38 @@ public final class Response implements HttpResponse {
         return this.headers;
     }
 
-    public void write1(OutputStream outputStream) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
-        bw.write(ResponseEntity.ok());
-        bw.write(EMPTY_LINE);
+    // public void write1(OutputStream outputStream) throws IOException {
+    //     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+    //     bw.write(ResponseEntity.ok());
+    //     bw.write(EMPTY_LINE);
 
-        //TODO:get the resource from the request
-        File file = new File("webapp/index.html");
+    //     //TODO:get the resource from the request
+    //     File file = new File("webapp/index.html");
 
-        if (file.canRead()) {
-            logger.info(file.getPath());
-            //TODO: get the content type dynamically based on the resource
-            headers.put(HttpHeaders.CONTENT_TYPE.getKey(), ResponseEntity.getMimeType("html"));
-            headers.put(HttpHeaders.CONTENT_LENGTH.getKey(), String.valueOf(file.length()));
-            headers.put(HttpHeaders.CACHE_CONTROL.getKey(), "max-age=" + 60 * 60 * 24);//cache for 24 hour?
+    //     if (file.canRead()) {
+    //         logger.info(file.getPath());
+    //         //TODO: get the content type dynamically based on the resource
+    //         headers.put(HttpHeaders.CONTENT_TYPE.getKey(), ResponseEntity.getMimeType("html"));
+    //         headers.put(HttpHeaders.CONTENT_LENGTH.getKey(), String.valueOf(file.length()));
+    //         headers.put(HttpHeaders.CACHE_CONTROL.getKey(), "max-age=" + 60 * 60 * 24);//cache for 24 hour?
 
-            //TODO: Support other cache control header like Etag
+    //         //TODO: Support other cache control header like Etag
 
-            for (String header : this.headers.keySet()) {
-                bw.write(header + COLON + headers.get(header));
-                bw.write(EMPTY_LINE);
-            }
-            bw.write(EMPTY_LINE);
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
-                char[] buff = new char[BUFF_SIZE];
-                int read;
-                while ((read = reader.read(buff)) != -1) {
-                    bw.write(buff, 0, read);
-                }
-            }
-        }
-        bw.flush();
-    }
+    //         for (String header : this.headers.keySet()) {
+    //             bw.write(header + COLON + headers.get(header));
+    //             bw.write(EMPTY_LINE);
+    //         }
+    //         bw.write(EMPTY_LINE);
+    //         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+    //             char[] buff = new char[BUFF_SIZE];
+    //             int read;
+    //             while ((read = reader.read(buff)) != -1) {
+    //                 bw.write(buff, 0, read);
+    //             }
+    //         }
+    //     }
+    //     bw.flush();
+    // }
 //this will display the env information on the default page
     public void write(OutputStream outputStream) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
